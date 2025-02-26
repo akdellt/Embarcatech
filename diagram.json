@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "author": "Danyelle M.",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-pi-pico-w",
+      "id": "pico",
+      "top": -22.45,
+      "left": -111.65,
+      "attrs": { "builder": "pico-sdk" }
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo1",
+      "top": -135.4,
+      "left": 69,
+      "rotate": 270,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo2",
+      "top": -135.4,
+      "left": 222.6,
+      "rotate": 270,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-analog-joystick",
+      "id": "joystick1",
+      "top": -231,
+      "left": -52.2,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": 35,
+      "left": -259.2,
+      "attrs": { "color": "blue", "xray": "1" }
+    },
+    {
+      "type": "board-ssd1306",
+      "id": "oled1",
+      "top": 185.54,
+      "left": -210.97,
+      "attrs": { "i2cAddress": "0x3c" }
+    },
+    {
+      "type": "wokwi-hx711",
+      "id": "cell1",
+      "top": 194.6,
+      "left": 50.6,
+      "attrs": { "type": "5kg" }
+    },
+    { "type": "wokwi-junction", "id": "j1", "top": -43.2, "left": -24, "attrs": {} },
+    { "type": "wokwi-junction", "id": "j2", "top": 24, "left": -24, "attrs": {} },
+    { "type": "wokwi-junction", "id": "j3", "top": 100.8, "left": 52.8, "attrs": {} },
+    { "type": "wokwi-junction", "id": "j4", "top": 4.8, "left": 14.4, "attrs": {} },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": -160.8,
+      "left": -171,
+      "attrs": { "volume": "0.1" }
+    },
+    { "type": "wokwi-junction", "id": "j5", "top": 52.8, "left": -148.8, "attrs": {} },
+    {
+      "type": "wokwi-text",
+      "id": "text1",
+      "top": -211.2,
+      "left": 105.6,
+      "attrs": { "text": "Ingrediente 1" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "text2",
+      "top": -211.2,
+      "left": 259.2,
+      "attrs": { "text": "Ingrediente 2\n" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "text3",
+      "top": 316.8,
+      "left": 201.6,
+      "attrs": { "text": "Balança\n" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "text4",
+      "top": -124.8,
+      "left": -374.4,
+      "attrs": { "text": "RECEITAS\nCookies: 300g + 150g\nBrownie: 500g + 170g\nBolo: 400g + 600g" }
+    }
+  ],
+  "connections": [
+    [ "pico:GP0", "$serialMonitor:RX", "", [] ],
+    [ "pico:GP1", "$serialMonitor:TX", "", [] ],
+    [ "servo2:PWM", "pico:GP21", "orange", [ "h0.2", "v86.4" ] ],
+    [ "joystick1:VERT", "pico:GP27", "orange", [ "v0" ] ],
+    [ "servo1:PWM", "pico:GP20", "orange", [ "v0" ] ],
+    [ "joystick1:HORZ", "pico:GP26", "orange", [ "v0" ] ],
+    [ "joystick1:SEL", "pico:GP22", "orange", [ "v0" ] ],
+    [ "btn1:2.r", "pico:GP6", "orange", [ "h0" ] ],
+    [ "oled1:SDA", "pico:GP14", "orange", [ "v0" ] ],
+    [ "oled1:SCL", "pico:GP15", "orange", [ "v0" ] ],
+    [ "oled1:GND", "pico:GND.4", "black", [ "v0" ] ],
+    [ "cell1:SCK", "pico:GP18", "orange", [ "h-19.2", "v-96.8" ] ],
+    [ "cell1:DT", "pico:GP17", "orange", [ "h-28.8", "v-67.7" ] ],
+    [ "j1:J", "joystick1:VCC", "red", [ "v0" ] ],
+    [ "oled1:VCC", "j1:J", "red", [ "v0" ] ],
+    [ "j3:J", "pico:GND.6", "black", [ "v0" ] ],
+    [ "pico:3V3", "j2:J", "red", [ "h0" ] ],
+    [ "j2:J", "servo1:V+", "red", [ "v0", "h172.8" ] ],
+    [ "j2:J", "servo2:V+", "red", [ "v0", "h326.4" ] ],
+    [ "j1:J", "j2:J", "red", [ "v0" ] ],
+    [ "servo2:GND", "j3:J", "black", [ "v0" ] ],
+    [ "cell1:GND", "j3:J", "black", [ "h0" ] ],
+    [ "servo1:GND", "j4:J", "black", [ "v0" ] ],
+    [ "joystick1:GND", "j4:J", "black", [ "v0" ] ],
+    [ "j4:J", "pico:GND.8", "black", [ "v0" ] ],
+    [ "cell1:VCC", "j2:J", "red", [ "h0" ] ],
+    [ "bz1:2", "pico:GP5", "orange", [ "v0" ] ],
+    [ "bz1:1", "j5:J", "black", [ "v0" ] ],
+    [ "btn1:1.r", "j5:J", "black", [ "v0" ] ],
+    [ "j5:J", "pico:GND.2", "black", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}

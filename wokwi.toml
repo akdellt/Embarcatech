@@ -1,0 +1,4 @@
+[wokwi]
+version = 1
+firmware = "build/display_oled.uf2"
+elf = "build/display_oled.elf"
